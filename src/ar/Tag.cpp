@@ -1,8 +1,8 @@
 #include "Tag.h"
 
 namespace AR
-{
-	double Tag::findAngle(cv::Point a, cv::Point b, cv::Point c) const
+{	
+	double findAngle(cv::Point a, cv::Point b, cv::Point c)
 	{
 		a = a - b;  // shift vectors so that B is at the origin
 		b = b - b;

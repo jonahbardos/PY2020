@@ -2,8 +2,10 @@
 
 #include <opencv2/core/types.hpp>
 #include <opencv2/core/core.hpp>
+#include <catch2/catch.hpp>
 
 #include <vector>
+#include <cmath>
 
 #define EVAN_LAPTOP_CAMERA_PARAMS 1
 #define EVAN_WEBCAM_PARAMS 2
@@ -66,14 +68,13 @@ namespace AR
 	private:
 		std::vector<Corner> corners;
 		double pitch;
-		double findAngle(cv::Point a, cv::Point b, cv::Point c) const;
 	public:
 		Tag(cv::Point top_left,
 			cv::Point top_right,
 			cv::Point bottom_right,
 			cv::Point bottom_left);
 		cv::Point getCenter() const;
-		cv::vector<Corner> getCorners() const;
+		std::vector<Corner> getCorners() const;
 		float getPitch() const;
 		float getYaw() const;
 		float getRoll() const;
