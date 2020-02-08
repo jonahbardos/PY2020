@@ -12,3 +12,4 @@ BreakConstructorInitializersBeforeComma: true
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 BreakBeforeBraces: Allman
 UseTab: ForIndentation
+IndentWidth: 4
