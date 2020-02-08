@@ -7,8 +7,8 @@
 
 enum class PacketKind
 {
-    CAN,
-    Network,
+	CAN,
+	Network,
 };
 
 struct Packet
