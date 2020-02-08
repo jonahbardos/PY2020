@@ -11,4 +11,4 @@ BinPackParameters: false
 BreakConstructorInitializersBeforeComma: true
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 BreakBeforeBraces: Allman
-UseTabStyle: ForIndentation
+UseTab: ForIndentation
