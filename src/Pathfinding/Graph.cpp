@@ -1,5 +1,5 @@
 #include "Graph.h"
-#include<vector>
+#include <vector>
 
 // void Graph::updateRobotLocation(Node newPoint)
 // {
@@ -30,13 +30,13 @@
 
 Graph::Graph()
 {
-    
-    // for(int i = -1 * Graph::radius; i <= Graph::radius; i += Graph::step)
-    // {
-    //     for(int j = -1 * Graph::radius; j <= Graph::radius; j += Graph::step)
-    //     {
-    //         createNode(Point{(double)i, (double)j});
-    //     }
-    // }
-    // robot_current_location = getNode(Point{0,0});
+
+	// for(int i = -1 * Graph::radius; i <= Graph::radius; i += Graph::step)
+	// {
+	//     for(int j = -1 * Graph::radius; j <= Graph::radius; j += Graph::step)
+	//     {
+	//         createNode(Point{(double)i, (double)j});
+	//     }
+	// }
+	// robot_current_location = getNode(Point{0,0});
 }

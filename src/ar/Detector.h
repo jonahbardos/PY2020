@@ -27,7 +27,8 @@ namespace AR
    @param blur_size Optional, the size of the blur used. MUST BE AN ODD NUMBER.
  */
 std::vector<Tag> findTags(cv::Mat input, cv::Mat &grayscale, cv::Mat &edges,
-                          int canny_thresh_1 = 50, int canny_thresh_2 = 120, int blur_size = 5);
+						  int canny_thresh_1 = 50, int canny_thresh_2 = 120,
+						  int blur_size = 5);
 
 /**
    @brief Find Tags in the given image.
@@ -41,5 +42,5 @@ std::vector<Tag> findTags(cv::Mat input, cv::Mat &grayscale, cv::Mat &edges,
    @param blur_size Optional, the size of the blur used. MUST BE AN ODD NUMBER.
 */
 std::vector<Tag> findTags(cv::Mat input, int canny_thresh_1 = 50, int canny_thresh_2 = 120,
-                          int blur_size = 5);
+						  int blur_size = 5);
 } // namespace AR

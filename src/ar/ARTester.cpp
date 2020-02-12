@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 
 		// pass frame to detector here
 		std::vector<AR::Tag> tags =
-		    AR::findTags(frame, gray, edges, thresh_val, thresh2_val, blur_val);
+			AR::findTags(frame, gray, edges, thresh_val, thresh2_val, blur_val);
 
 		// show locations of tags in window
 		std::cout << "Found " << tags.size() << " tags" << std::endl;
@@ -79,16 +79,16 @@ int main(int argc, char *argv[])
 			for (int i = 0; i < corners.size() - 1; i++)
 			{
 				cv::line(frame, corners[i].point, corners[i + 1].point, cv::Scalar(0, 0, 255),
-				         3);
+						 3);
 				double l = std::sqrt(pow(corners[i].point.x - corners[i + 1].point.x, 2) +
-				                     pow(corners[i].point.y - corners[i + 1].point.y, 2));
+									 pow(corners[i].point.y - corners[i + 1].point.y, 2));
 				cv::drawMarker(frame, corners[i].point, cv::Scalar(255, 0, 0),
-				               cv::MARKER_CROSS, l / 10, 2, cv::FILLED);
+							   cv::MARKER_CROSS, l / 10, 2, cv::FILLED);
 			}
 			cv::drawMarker(frame, tag.getCenter(), cv::Scalar(0, 255, 0), cv::MARKER_CROSS, 15,
-			               2, cv::FILLED);
+						   2, cv::FILLED);
 			std::cout << "center: " << tag.getCenter() << " p: " << tag.getPitch()
-			          << " r: " << tag.getRoll() << " y: " << tag.getYaw() << std::endl;
+					  << " r: " << tag.getRoll() << " y: " << tag.getYaw() << std::endl;
 		}
 
 		cv::imshow(ORIG_WINDOW_NAME, frame);

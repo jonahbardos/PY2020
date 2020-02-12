@@ -1,5 +1,5 @@
-#include "CommandLineOptions.h"
 #include "Globals.h"
+#include "CommandLineOptions.h"
 #include "Network.h"
 
 #include <vector>

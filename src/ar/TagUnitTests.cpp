@@ -5,8 +5,8 @@
 #include <opencv2/core.hpp>
 #include <opencv2/core/types.hpp>
 
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 TEST_CASE("square tag has zero angles", "[tag]")
 {
@@ -15,16 +15,16 @@ TEST_CASE("square tag has zero angles", "[tag]")
 	double h = 0.5;
 	double cx = 0;
 	double cy = 0;
-	undistorted.push_back(cv::Point3f(cx-(w/2), cy-(h/2), 0));
-	undistorted.push_back(cv::Point3f(cx+(w/2), cy-(h/2), 0));
-	undistorted.push_back(cv::Point3f(cx+(w/2), cy+(h/2), 0));
-	undistorted.push_back(cv::Point3f(cx-(w/2), cy+(h/2), 0));
-	
+	undistorted.push_back(cv::Point3f(cx - (w / 2), cy - (h / 2), 0));
+	undistorted.push_back(cv::Point3f(cx + (w / 2), cy - (h / 2), 0));
+	undistorted.push_back(cv::Point3f(cx + (w / 2), cy + (h / 2), 0));
+	undistorted.push_back(cv::Point3f(cx - (w / 2), cy + (h / 2), 0));
+
 	std::vector<cv::Point2f> distorted;
 	cv::Vec3d rvec(0, 0, 0);
 	cv::Vec3d tvec(0, 0, 0);
 	cv::projectPoints(undistorted, rvec, tvec, AR::CAMERA_PARAMS, AR::DISTORTION_PARAMS,
-	                  distorted);
+					  distorted);
 	std::cout << "distorted: " << distorted << std::endl;
 
 	AR::Tag tag(distorted[0], distorted[1], distorted[2], distorted[3]);

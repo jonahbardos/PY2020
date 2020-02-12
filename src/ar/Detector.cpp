@@ -20,7 +20,7 @@ cv::Mat removeNoise(cv::Mat input, int blur_size = 5)
 }
 
 cv::Mat prepImage(cv::Mat input, int blur_size, int thresh_val, int thresh_val2,
-                  cv::Mat &grayscale)
+				  cv::Mat &grayscale)
 {
 	cv::Mat blur = removeNoise(input, blur_size);
 	cv::Mat gray;
@@ -93,7 +93,7 @@ bool isTagData(cv::Mat &data)
 
 	// check for orientation shape
 	cv::Point2i orientationPoints[] = {cv::Point2i(4, 2), cv::Point2i(2, 4), cv::Point2i(4, 6),
-	                                   cv::Point2i(6, 4)};
+									   cv::Point2i(6, 4)};
 	int whiteCount = 0;
 	int blackCount = 0;
 	for (cv::Point p : orientationPoints)
@@ -129,7 +129,7 @@ bool contourInsideAnother(std::vector<cv::Point2f> input, std::vector<cv::Point2
 }
 
 std::vector<Tag> findTags(cv::Mat input, cv::Mat &grayscale, cv::Mat &edges,
-                          int canny_thresh_1, int canny_thresh_2, int blur_size)
+						  int canny_thresh_1, int canny_thresh_2, int blur_size)
 {
 	// set of "ideal" points used for perspective transform
 	std::vector<cv::Point2f> ideal;
@@ -139,7 +139,7 @@ std::vector<Tag> findTags(cv::Mat input, cv::Mat &grayscale, cv::Mat &edges,
 	ideal.push_back(cv::Point2f(0, IDEAL_TAG_SIZE));
 
 	cv::Mat prepped_input =
-	    prepImage(input, blur_size, canny_thresh_1, canny_thresh_2, grayscale);
+		prepImage(input, blur_size, canny_thresh_1, canny_thresh_2, grayscale);
 	edges = prepped_input;
 
 	// vector to hold the contours found
@@ -153,7 +153,7 @@ std::vector<Tag> findTags(cv::Mat input, cv::Mat &grayscale, cv::Mat &edges,
 	std::vector<Tag> output;
 	// find contours in the image
 	cv::findContours(prepped_input, contours, heirarchy, cv::RETR_TREE,
-	                 cv::CHAIN_APPROX_SIMPLE);
+					 cv::CHAIN_APPROX_SIMPLE);
 
 	// loop over all contours and approximate them with polygons
 	for (size_t i = 0; i < contours.size(); i++)
@@ -162,7 +162,7 @@ std::vector<Tag> findTags(cv::Mat input, cv::Mat &grayscale, cv::Mat &edges,
 		cv::approxPolyDP(contours[i], approx, arcLength(contours[i], true) * 0.02, true);
 		// if polygons have 4 sides and are of an appropriately large area
 		if (approx.size() == 4 && cv::isContourConvex(approx) &&
-		    cv::contourArea(approx) > CONTOUR_AREA_THRESH)
+			cv::contourArea(approx) > CONTOUR_AREA_THRESH)
 		{
 			// add them to quadrilateral candidates
 			quads.push_back(approx);
@@ -176,18 +176,18 @@ std::vector<Tag> findTags(cv::Mat input, cv::Mat &grayscale, cv::Mat &edges,
 		// sort points into the correct order (top left, top right, bottom right,
 		// bottom left)
 		std::sort(current.begin(), current.end(),
-		          [](cv::Point pt1, cv::Point pt2) -> bool { return pt1.y < pt2.y; });
+				  [](cv::Point pt1, cv::Point pt2) -> bool { return pt1.y < pt2.y; });
 		std::sort(current.begin(), current.begin() + 2,
-		          [](cv::Point pt1, cv::Point pt2) -> bool { return pt1.x < pt2.x; });
+				  [](cv::Point pt1, cv::Point pt2) -> bool { return pt1.x < pt2.x; });
 		std::sort(current.begin() + 2, current.end(),
-		          [](cv::Point pt1, cv::Point pt2) -> bool { return pt1.x > pt2.x; });
+				  [](cv::Point pt1, cv::Point pt2) -> bool { return pt1.x > pt2.x; });
 
 		// perspective transform the quadrilateral to a flat square, and attempt to read data
 		// from it like it is an AR tag
 		cv::Mat transform = cv::getPerspectiveTransform(current, ideal);
 		cv::Mat square;
 		cv::warpPerspective(grayscale, square, transform,
-		                    cv::Size(IDEAL_TAG_SIZE, IDEAL_TAG_SIZE));
+							cv::Size(IDEAL_TAG_SIZE, IDEAL_TAG_SIZE));
 		cv::Mat data = readData(square);
 
 		// if the data read matches criteria for a tag
@@ -218,7 +218,7 @@ std::vector<Tag> findTags(cv::Mat input, cv::Mat &grayscale, cv::Mat &edges,
 std::vector<Tag> findTags(cv::Mat input, int canny_thresh_1, int canny_thresh_2, int blur_size)
 {
 	cv::Mat junk; // this Mat won't be used later. it's just used to be passed as a
-	              // reference to the function this is overloading.
+				  // reference to the function this is overloading.
 	return findTags(input, junk, junk, canny_thresh_1, canny_thresh_2, blur_size);
 }
 } // namespace AR

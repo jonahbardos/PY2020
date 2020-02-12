@@ -58,7 +58,7 @@ namespace AR
 /** OpenCV matrix containing the intrinsic camera parameters. */
 const cv::Mat CAMERA_PARAMS(3, 3, CV_64FC1, *CAMERA_PARAMS_ARRAY);
 /** OpenCV matrix containing the distortion parameters. */
-//const cv::Mat DISTORTION_PARAMS(1, 5, CV_64FC1, *DISTORTION_PARAMS_ARRAY);
+// const cv::Mat DISTORTION_PARAMS(1, 5, CV_64FC1, *DISTORTION_PARAMS_ARRAY);
 const cv::Mat DISTORTION_PARAMS = cv::Mat::zeros(1, 5, CV_64F);
 
 /**
@@ -95,7 +95,7 @@ enum CornerIndex
  */
 class Tag
 {
-  private:
+private:
 	/** Stores the corners of the tag in the image */
 	std::vector<Corner> corners;
 	/** Stores the orientation Euler angles */
@@ -103,19 +103,19 @@ class Tag
 	/** Calculates the orientation Euler angles */
 	cv::Vec3d calcOrientation();
 
-  public:
+public:
 	/**
 	   Constructor for a Tag. Takes four OpenCV points which are the coordinates of the
 	   corners of the Tag in the image. Note the order of points; this will be checked and
 	   an AR::InvalidCornerException will be thrown if ordering is incorrect.
 	 */
 	Tag(cv::Point top_left, cv::Point top_right, cv::Point bottom_right,
-	    cv::Point bottom_left);
+		cv::Point bottom_left);
 	/** Gets the coordinates of the center of the tag. */
 	cv::Point getCenter() const;
 	/**
-	    Gets the corners of the tag. Note that this is a const operation and a copy of the
-	    corners will be returned.
+		Gets the corners of the tag. Note that this is a const operation and a copy of the
+		corners will be returned.
 	*/
 	std::vector<Corner> getCorners() const;
 	/** Gets the pitch (rotation about x axis) of the tag */
