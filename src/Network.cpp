@@ -30,7 +30,7 @@ void ParseIncomingNetworkPackets()
 
 void SendOutgoingNetworkPackets()
 {
-	// NOTE(sasha): This is sort of pseudocode for what we want to do here.
+// NOTE(sasha): This is sort of pseudocode for what we want to do here.
 #if 0
     for(const Packet &p : Globals::outgoing_packets)
     {
