@@ -1,12 +1,12 @@
-#include "Tag.h"
+#include <cmath>
+#include <iostream>
 
 #include <catch2/catch.hpp>
 #include <opencv2/calib3d.hpp>
 #include <opencv2/core.hpp>
 #include <opencv2/core/types.hpp>
 
-#include <cmath>
-#include <iostream>
+#include "Tag.h"
 
 TEST_CASE("square tag has zero angles", "[tag]")
 {

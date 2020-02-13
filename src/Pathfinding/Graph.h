@@ -1,6 +1,7 @@
 #pragma once
-#include "Geometry.h"
 #include <vector>
+
+#include "Geometry.h"
 // using node_ptr = std::shared_ptr<Node>;
 
 // //struct Neighbor {

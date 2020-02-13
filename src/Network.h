@@ -1,9 +1,9 @@
 #pragma once
 
+#include <cstdint>
+
 #include "Constants.h"
 #include "Globals.h"
-
-#include <cstdint>
 
 enum class PacketKind
 {

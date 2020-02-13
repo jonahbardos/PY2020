@@ -1,10 +1,11 @@
 
 #pragma once
 
-#include "Eigen/Dense"
 #include "common.h"
 #include "measurement_package.h"
 #include "tools.h"
+
+#include "Eigen/Dense"
 #define INF 1000
 
 class EKFSLam

@@ -1,9 +1,9 @@
 #pragma once
 
+#include <vector>
+
 #include "CommandLineOptions.h"
 #include "Network.h"
-
-#include <vector>
 
 enum class RoverState
 {

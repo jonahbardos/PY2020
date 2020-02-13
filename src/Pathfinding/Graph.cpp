@@ -1,4 +1,5 @@
 #include "Graph.h"
+
 #include <vector>
 
 // void Graph::updateRobotLocation(Node newPoint)

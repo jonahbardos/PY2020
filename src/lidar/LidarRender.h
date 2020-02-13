@@ -1,10 +1,10 @@
 #pragma once
 
-#include "PointCloudProcessing.h"
-#include "PointGenerator.h"
-
 #include <set>
 #include <vector>
+
+#include "PointCloudProcessing.h"
+#include "PointGenerator.h"
 
 namespace Lidar
 {

@@ -1,8 +1,8 @@
 #pragma once
 
-#include <opencv2/core.hpp>
-
 #include <vector>
+
+#include <opencv2/core.hpp>
 
 #define EVAN_LAPTOP_CAMERA_PARAMS 1
 #define EVAN_WEBCAM_PARAMS 2

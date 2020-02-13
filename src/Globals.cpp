@@ -1,8 +1,9 @@
 #include "Globals.h"
-#include "CommandLineOptions.h"
-#include "Network.h"
 
 #include <vector>
+
+#include "CommandLineOptions.h"
+#include "Network.h"
 
 CommandLineOptions Globals::opts;
 RoverState Globals::curr_state;

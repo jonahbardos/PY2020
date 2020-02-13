@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Tag.h"
+#include <vector>
 
 #include <opencv2/core.hpp>
 
-#include <vector>
+#include "Tag.h"
 
 namespace AR
 {

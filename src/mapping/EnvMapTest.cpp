@@ -1,4 +1,5 @@
 #include "EnvMapTest.h"
+
 #include "EnvMap.h"
 
 int main(int argc, const char *argv[])

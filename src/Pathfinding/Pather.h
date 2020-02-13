@@ -1,6 +1,7 @@
 #pragma once
-#include "Geometry.h"
 #include <vector>
+
+#include "Geometry.h"
 class Pather
 {
 public:

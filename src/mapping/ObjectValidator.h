@@ -1,9 +1,10 @@
-#include "Cluster.h"
-#include "EKFSlam.h"
-#include "EnvMap.h"
 #include <memory>
 #include <set>
 #include <vector>
+
+#include "Cluster.h"
+#include "EKFSlam.h"
+#include "EnvMap.h"
 
 /*
 Used to decide which obstacles we have seen before and which we haven't

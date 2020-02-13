@@ -1,10 +1,11 @@
 #include "PointCloudProcessing.h"
-#include "SyntheticLidar.h"
 
 #include <cmath>
 #include <iostream>
 #include <limits>
 #include <queue>
+
+#include "SyntheticLidar.h"
 
 namespace Lidar
 {

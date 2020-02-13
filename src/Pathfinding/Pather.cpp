@@ -1,6 +1,8 @@
 #include "Pather.h"
-#include "Map.h"
+
 #include <vector>
+
+#include "Map.h"
 
 Pather::Pather(std::vector<std::vector<bool>> map)
 {

@@ -1,9 +1,10 @@
 #pragma once
 
 #include <chrono>
-#include <math.h>
 #include <memory>
 #include <vector>
+
+#include <math.h>
 
 struct Polar2D;
 

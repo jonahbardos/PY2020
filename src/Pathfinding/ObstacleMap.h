@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
-#include <math.h>
 #include <vector>
+
+#include <math.h>
 // #include <memory> // remove once EnvMap.h is included
 // #include "MapObstacle.h"
 #include "../mapping/EnvMap.h"

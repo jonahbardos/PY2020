@@ -1,5 +1,4 @@
 #include "Network.h"
-#include "Globals.h"
 
 #include <cassert>
 
@@ -8,6 +7,8 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <unistd.h>
+
+#include "Globals.h"
 
 #ifdef __linux__
 #include <linux/can.h>

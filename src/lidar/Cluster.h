@@ -1,10 +1,10 @@
 #pragma once
 
-#include "SyntheticLidar.h"
-
 #include <memory>
 #include <set>
 #include <vector>
+
+#include "SyntheticLidar.h"
 
 typedef struct PointXY
 {

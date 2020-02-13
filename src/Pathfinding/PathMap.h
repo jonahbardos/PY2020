@@ -1,6 +1,7 @@
 #pragma once
-#include "EnvMap.h"
 #include <vector>
+
+#include "EnvMap.h"
 
 // make reference or pointer to global SLAM map obj
 // recieve list of obstacles within specified range
