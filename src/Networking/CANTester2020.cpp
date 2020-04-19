@@ -84,7 +84,7 @@ void SendSingleCAN()
       if (deviceSerial < 13 && deviceSerial > 0)
       {
         std::cout << "Enter motor packet ID number";
-        std::cout << "(0-Mode Select) (3-PWM Speed)";
+        std::cout << "(0-Mode Select) (3-PWM Speed) (4-PID Position"; //TODO Is the 0 supposed to be a 1?
         uint8_t motorID;
         std::cin >> motorID;
 
@@ -95,7 +95,7 @@ void SendSingleCAN()
           std::cout << "Enter motor mode (0-PWM) (1-PID)";
           uint8_t motorMode;
           std::cin >> motorMode;
-          AssemblePWMDirSetPacket(&p, deviceGroup, deviceSerial, motorMode);
+          AssemblePWMDirSetPacket(&p, deviceGroup, deviceSerial, motorMode); //TODO Is this supposed to be SetMode from CANMotorUnit.h?
         }
         else if (motorID == 3) 
         {
@@ -104,6 +104,12 @@ void SendSingleCAN()
           std::cin >> PWMVal;
           AssemblePWMDirSetPacket(&p, deviceGroup, deviceSerial, PWMVal);
         }
+	else if (motorID == 4) 
+	{
+	  std::cout << "Enter PID positional target";
+	  int32_t PIDVal;
+	  AssemblePIDTargetSetPacket(&p, deviceGroup, deviceSerial, PIDVal);  
+	}
         else { std::cout << "Packet ID not supported yet"; }
         // TODO: Add more packet types
 
