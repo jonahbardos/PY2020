@@ -36,6 +36,8 @@ std::vector<int> motor_packet_lengths = {
 
 bool SendCANPacketToMotor(json &message, int key_idx, uint16_t CAN_ID);
 bool ParseDrivePacket(json &message);
+bool ParsePuppetPacket(json &message);
+bool sendCANPacketAngle(std::string joint, int angle);
 
 int getIndex(const std::vector<std::string> &arr, std::string &value)
 {
@@ -88,6 +90,9 @@ bool ParseBaseStationPacket(char const* buffer)
   }
   else if (type == "motor") {
     success = ParseMotorPacket(parsed_message);
+  }
+  else if (type == "puppet") {
+    success = ParsePuppetPacket(parsed_message);
   }
   if (success)
   {
@@ -175,6 +180,54 @@ bool ParseDrivePacket(json &message)
   ParseMotorPacket(packet);
   packet["motor"] = "back_left_wheel";
   ParseMotorPacket(packet);
+  return true;
+}
+
+bool ParsePuppetPacket(json &message)
+{
+  // Propably won't be getting values for all of these angles
+  uint16_t base, shoulder, elbow, forearm, diff_l, diff_r, hand;
+  try
+  {
+    base = message["base"];
+    shoulder = message["shoulder"];
+    elbow = message["elbow"];
+    forearm = message["forearm"];
+    diff_l = message["diff_l"];
+    diff_r = message["diff_r"];
+    hand = message["hand"];
+  }
+  catch (json::type_error)
+  {
+    return sendError("Malformatted puppet packet");
+  }
+  if (!sendCANPacketAngle("arm_base", base)) { return false; }
+  if (!sendCANPacketAngle("shoulder", shoulder)) { return false; }
+  if (!sendCANPacketAngle("elbow", elbow)) { return false; }
+  if (!sendCANPacketAngle("forearm", forearm)) { return false; }
+  if (!sendCANPacketAngle("diffleft", diff_l)) { return false; }
+  if (!sendCANPacketAngle("diffright", diff_r)) { return false; }
+  if (!sendCANPacketAngle("hand", hand)) { return false; }
+
+  return true;
+}
+
+bool sendCANPacketAngle(std::string joint, int angle)
+{
+  // Assumes negative angles mean value is not used in puppet control
+  if (angle < 0) 
+  {
+    return true;
+  }
+  
+  json base_packet = {{"type", "motor"},
+                      {"motor", joint},
+                      {"mode", "PID"},
+                      {"PID target", angle}}; 
+  if (!ParseMotorPacket(base_packet))
+  {
+    return false;
+  }
   return true;
 }
 
