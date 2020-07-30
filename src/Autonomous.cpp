@@ -1,6 +1,7 @@
 #include "Autonomous.h"
 #include "simulator/world_interface.h"
 #include <cmath>
+#include <Eigen/LU>
 
 constexpr float PI = M_PI;
 
@@ -80,6 +81,24 @@ void Autonomous::autonomyIter()
   //    robot frame -> map frame transform
   //    GPS frame -> map frame transform
   //  output: goal pose in map frame
+
+  URCLeg leg = getLeg(0); // 0 to 6
+  bool left_post_visible = (landmarks[leg.left_post_id](2) != 0);
+  bool is_gate = leg.right_post_id != -1;
+  bool right_post_visible = (is_gate && landmarks[leg.right_post_id](2) != 0);
+  if (left_post_visible) {
+    point_t location = landmarks[leg.left_post_id]; // in robot frame
+    transform_t tf = gps.inverse();
+    point_t location_in_map_frame = tf * location;
+    target.x = location_in_map_frame(0);
+    target.y = location_in_map_frame(1);
+  } else if (left_post_visible && right_post_visible) {
+
+  } else {
+    target.x = leg.approx_GPS(0);
+    target.y = leg.approx_GPS(1);
+  }
+
   //
   // Assaf: taking a map and computing a plan
   //  input: pose of robot in map frame, map (provided as a list of points), goal pose in map frame
