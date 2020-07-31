@@ -88,18 +88,24 @@ void Autonomous::autonomyIter()
   bool is_gate = leg.right_post_id != -1;
   bool right_post_visible = (is_gate && landmarks[leg.right_post_id](2) != 0);
   
-  if (left_post_visible && right_post_visible) {
-    // mid-point formula: ((x_l + x_r)/2, (y_l, y_r)/2)
-    // Add perpendicular offset to midpoint
-    //     Formula:
-    //     (U/(distance from left post to mp))*(vector which is perpendicular to gates)   
-  }
-  else if (left_post_visible) {
-    point_t location = landmarks[leg.left_post_id]; // in robot frame
+  if (left_post_variable) {
+    point_t left_location = landmarks[leg.left_post_id]; // in robot frame
     transform_t tf = gps.inverse();
-    point_t location_in_map_frame = tf * location;
-    target.x = location_in_map_frame(0);
-    target.y = location_in_map_frame(1);
+    point_t left_in_map_frame = tf * left_location;
+
+    if (right_post_visible) {
+      // mid-point formula: ((x_l + x_r)/2, (y_l, y_r)/2)
+      // Add perpendicular offset to midpoint
+      //     Formula:
+      //     (U/(distance from left post to mp))*(vector which is perpendicular to gates)
+      point_t right_location = landmarks[leg.right_post_id];
+      point_t right_in_map_frame = tf * right_location;
+      
+    }
+    else {
+      target.x = left_in_map_frame(0);
+      target.y = left_in_map_frame(1);
+    }
   } else {
     target.x = leg.approx_GPS(0); // Currently just uses GPS frame of reference
     target.y = leg.approx_GPS(1);
