@@ -82,20 +82,26 @@ void Autonomous::autonomyIter()
   //    GPS frame -> map frame transform
   //  output: goal pose in map frame
 
-  URCLeg leg = getLeg(0); // 0 to 6
-  bool left_post_visible = (landmarks[leg.left_post_id](2) != 0);
+  URCLeg leg = getLeg(0); // Leg number depends on input?
+  
+  bool left_post_visible = (landmarks[leg.left_post_id](2) != 0); 
   bool is_gate = leg.right_post_id != -1;
   bool right_post_visible = (is_gate && landmarks[leg.right_post_id](2) != 0);
-  if (left_post_visible) {
+  
+  if (left_post_visible && right_post_visible) {
+    // mid-point formula: ((x_l + x_r)/2, (y_l, y_r)/2)
+    // Add perpendicular offset to midpoint
+    //     Formula:
+    //     (U/(distance from left post to mp))*(vector which is perpendicular to gates)   
+  }
+  else if (left_post_visible) {
     point_t location = landmarks[leg.left_post_id]; // in robot frame
     transform_t tf = gps.inverse();
     point_t location_in_map_frame = tf * location;
     target.x = location_in_map_frame(0);
     target.y = location_in_map_frame(1);
-  } else if (left_post_visible && right_post_visible) {
-
   } else {
-    target.x = leg.approx_GPS(0);
+    target.x = leg.approx_GPS(0); // Currently just uses GPS frame of reference
     target.y = leg.approx_GPS(1);
   }
 
